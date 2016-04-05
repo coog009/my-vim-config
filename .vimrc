@@ -4,23 +4,51 @@ filetype off                                          "禁用文件类型侦测
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Bundle 'Shougo/neocomplcache.vim'
 Bundle 'OmniCppComplete'
+Bundle 'gmarik/vundle'
 Bundle 'taglist.vim'
 Bundle 'Trinity'
-Bundle 'SrcExpl'
+" Bundle 'SrcExpl'
 
 " Open and close all the three plugins on the same time
-nmap <F8>   :TrinityToggleAll<CR>
+" nmap <F8>   :TrinityToggleAll<CR>
 
 " Open and close the srcexpl.vim separately
-nmap <F9>   :TrinityToggleSourceExplorer<CR>
+" nmap <F9>   :TrinityToggleSourceExplorer<CR>
 
 " Open and close the taglist.vim separately
-nmap <F10>  :TrinityToggleTagList<CR>
+" nmap <F10>  :TrinityToggleTagList<CR>
 
 " Open and close the NERD_tree.vim separately
-nmap <F11>  :TrinityToggleNERDTree<CR>
+" nmap <F7>  :TrinityToggleNERDTree<CR>
+
+" // The switch of the Source Explorer 
+" nmap <F8> :SrcExplToggle<CR> 
+
+" // Set the height of Source Explorer window 
+" let g:SrcExpl_winHeight = 8 
+
+" // Set 100 ms for refreshing the Source Explorer 
+" let g:SrcExpl_refreshTime = 100 
+
+" // Set "Enter" key to jump into the exact definition context 
+" let g:SrcExpl_jumpKey = "<ENTER>" 
+
+" // Set "Space" key for back from the definition context 
+" let g:SrcExpl_gobackKey = "<SPACE>" 
+
+" // In order to Avoid conflicts, the Source Explorer should know what plugins 
+" // are using buffers. And you need add their bufname into the list below 
+" // according to the command ":buffers!" 
+" let g:SrcExpl_pluginList = [ 
+" 	\ "__Tag_List__", 
+" 	\ "_NERD_tree_", 
+" 	\ "Source_Explorer" 
+" 	\ ] 
+
+" // Set "<F12>" key for updating the tags file artificially 
+" let g:SrcExpl_updateTagsKey = "<F12>"  
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -32,7 +60,7 @@ set mouse=a
 set number                 
 
 if has("autocmd")
-	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |exe("norm '\"")|else|exe "normal! g'\"" |endif
 endif
 
 " 启用每行超过80列的字符提示（字体变蓝并加下划线），不启用就注释掉
@@ -44,8 +72,10 @@ set shiftwidth=8                                      "换行时自动缩进宽�
 set smarttab                                          "指定按一次backspace就删除shiftwidth宽度为
 set hlsearch
 
+" let g:neocomplcache_enable_at_startup = 1     "vim 启动时启用插件
+
 " 当文件在外部被修改，自动更新该文件
-set autoread
+" set autoread
 
 " 常规模式下输入 cS 清除行尾空格
 nmap cS :%s/\s\+$//g<CR>:noh<CR>
@@ -72,10 +102,11 @@ endif
 
 " 用Cscope自己的话说 - "你可以把它当做是超过频的ctags"
 if has("cscope")
-	set csprg=/usr/bin/cscope
+	"设定可以使用 quickfix 窗口来查看 cscope 结果
+	"set cscopequickfix=s+,c+,d+,i+,t+,e+
+	set cscopequickfix=""
 	set csto=0
 	set cst
-	set nocsverb
 	" add any database in current directory
 	if filereadable("cscope.out")
 		cs add cscope.out
@@ -111,4 +142,4 @@ function! UpdateCtags()
 	endif
 	execute ":cd " . curdir
 endfunction
-autocmd BufWritePost *.c,*.h,*.cpp call UpdateCtags()
+"autocmd BufWritePost *.c,*.h,*.cpp call UpdateCtags()
