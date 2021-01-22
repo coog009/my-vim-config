@@ -9,32 +9,31 @@ Bundle 'OmniCppComplete'
 Bundle 'gmarik/vundle'
 Bundle 'taglist.vim'
 Bundle 'Trinity'
-" Bundle 'SrcExpl'
+Bundle 'SrcExpl'
 
 " Open and close all the three plugins on the same time
-" nmap <F8>   :TrinityToggleAll<CR>
+nmap <F8>   :TrinityToggleAll<CR>
 
 " Open and close the srcexpl.vim separately
-" nmap <F9>   :TrinityToggleSourceExplorer<CR>
+nmap <F9>   :TrinityToggleSourceExplorer<CR>
 
 " Open and close the taglist.vim separately
-" nmap <F10>  :TrinityToggleTagList<CR>
+nmap <F10>  :TrinityToggleTagList<CR>
 
 " Open and close the NERD_tree.vim separately
-" nmap <F7>  :TrinityToggleNERDTree<CR>
+nmap <F7>  :TrinityToggleNERDTree<CR>
 
 " // The switch of the Source Explorer 
 " nmap <F8> :SrcExplToggle<CR> 
 
 " // Set the height of Source Explorer window 
-" let g:SrcExpl_winHeight = 8 
+let g:SrcExpl_winHeight = 8 
 
 " // Set 100 ms for refreshing the Source Explorer 
-" let g:SrcExpl_refreshTime = 100 
+let g:SrcExpl_refreshTime = 100 
 
 " // Set "Enter" key to jump into the exact definition context 
 " let g:SrcExpl_jumpKey = "<ENTER>" 
-
 " // Set "Space" key for back from the definition context 
 " let g:SrcExpl_gobackKey = "<SPACE>" 
 
@@ -48,7 +47,7 @@ Bundle 'Trinity'
 " 	\ ] 
 
 " // Set "<F12>" key for updating the tags file artificially 
-" let g:SrcExpl_updateTagsKey = "<F12>"  
+let g:SrcExpl_updateTagsKey = "<F12>"  
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -66,11 +65,12 @@ endif
 " 启用每行超过80列的字符提示（字体变蓝并加下划线），不启用就注释掉
 au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
-set tabstop=8                                         "设置Tab键的宽度，可以更改，如：宽度为2
+set tabstop=4                                         "设置Tab键的宽度，可以更改，如：宽度为2
 set smartindent                                       "启用智能对齐方式
-set shiftwidth=8                                      "换行时自动缩进宽度，可更改（宽度同tabstop）
+set shiftwidth=4                                      "换行时自动缩进宽度，可更改（宽度同tabstop）
 set smarttab                                          "指定按一次backspace就删除shiftwidth宽度为
 set hlsearch
+set expandtab
 
 " let g:neocomplcache_enable_at_startup = 1     "vim 启动时启用插件
 
@@ -143,3 +143,4 @@ function! UpdateCtags()
 	execute ":cd " . curdir
 endfunction
 "autocmd BufWritePost *.c,*.h,*.cpp call UpdateCtags()
+set guifont=Menlo\ Regular:h18
