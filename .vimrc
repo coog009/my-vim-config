@@ -144,3 +144,6 @@ function! UpdateCtags()
 endfunction
 "autocmd BufWritePost *.c,*.h,*.cpp call UpdateCtags()
 set guifont=Menlo\ Regular:h18
+if has('mouse')
+    set mouse-=a
+endif
